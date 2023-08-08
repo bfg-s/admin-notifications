@@ -77,13 +77,6 @@ class ServiceProvider extends ExtendProvider
         ], 'bfg-admin-notifications');
 
         \Lar\LJS\Facade::jaxNamespace(__DIR__ . '/Jax', '\\Admin\\Extend\\AdminNotifications\\Jax');
-
-        if (
-            class_exists(Audit::class)
-            && class_exists(AuditController::class)
-        ) {
-            Audit::observe(AuditModelObserver::class);
-        }
     }
 }
 

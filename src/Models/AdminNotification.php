@@ -5,6 +5,31 @@ namespace Admin\Extend\AdminNotifications\Models;
 use Admin\Models\AdminUser;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Admin\Extend\AdminNotifications\Models\AdminNotification
+ *
+ * @property int $id
+ * @property int|null $admin_user_id
+ * @property string $title
+ * @property string|null $link
+ * @property string $text
+ * @property string|null $read_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read AdminUser|null $admin
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminNotification newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminNotification newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminNotification query()
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminNotification whereAdminUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminNotification whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminNotification whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminNotification whereLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminNotification whereReadAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminNotification whereText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminNotification whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminNotification whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class AdminNotification extends Model
 {
     protected $table = "admin_notifications";
