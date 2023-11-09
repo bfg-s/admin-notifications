@@ -15,7 +15,7 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
 
             <template v-for="(item, key) in items">
-                <a :href="item.link ? item.link : `javascript:void(0)`" class="dropdown-item" :key="item.id+'-item-notification'">
+                <a :href="item.link ? item.link : `javascript:void(0)`" @click="readed(item.id)" class="dropdown-item" :key="item.id+'-item-notification'">
                     <div class="media">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
