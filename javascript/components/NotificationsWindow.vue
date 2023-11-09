@@ -69,6 +69,7 @@ export default {
         },
         async readed (id) {
             await axios.post(this.set_as_read_route, {_token: exec('token'), id})
+            await this.updateItems();
         },
         async toggleSound() {
             let audio = this.$refs.audio;
