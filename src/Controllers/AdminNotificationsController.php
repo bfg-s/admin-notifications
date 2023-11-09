@@ -1,10 +1,11 @@
 <?php
 
-namespace Admin\Extend\AdminNotifications;
+namespace Admin\Extend\AdminNotifications\Controllers;
 
 use Admin\Extend\AdminNotifications\Models\AdminNotification;
 use Admin\Models\AdminUser;
 use Admin\Page;
+use Admin\Respond;
 use App\Admin\Controllers\Controller;
 use App\Admin\Delegates\Buttons;
 use App\Admin\Delegates\Card;
@@ -12,7 +13,8 @@ use App\Admin\Delegates\Form;
 use App\Admin\Delegates\SearchForm;
 use App\Admin\Delegates\ModelTable;
 use App\Admin\Delegates\ModelInfoTable;
-use Lar\Layout\Respond;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class AdminNotificationsController extends Controller
 {
@@ -22,7 +24,11 @@ class AdminNotificationsController extends Controller
      */
     static $model = AdminNotification::class;
 
-    public function defaultTools($type)
+    /**
+     * @param $type
+     * @return bool
+     */
+    public function defaultTools($type): bool
     {
         return !($type === 'add');
     }
@@ -34,6 +40,8 @@ class AdminNotificationsController extends Controller
      * @param  ModelTable  $modelTable
      * @param  Buttons  $buttons
      * @return Page
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public function index(
         Page $page,
@@ -53,10 +61,10 @@ class AdminNotificationsController extends Controller
             ),
             $card->model_table(
                 $modelTable->id(),
-                $modelTable->col('Admin', 'admin.email')->sort('admin_user_id')->to_export(),
+                $modelTable->col('Admin email', 'admin.email')->sort('admin_user_id')->to_export(),
                 $modelTable->col('Title', 'title')->sort()->to_export(),
                 $modelTable->col('Text', 'text')->sort()->to_export(),
-                $modelTable->col('Read at', 'read_at')->sort()->butty_date_time->to_export(),
+                $modelTable->col('Read at', 'read_at')->sort()->beautiful_date_time()->to_export(),
                 $modelTable->buttons(
                     $buttons->warning()
                         ->icon_play()
@@ -126,7 +134,7 @@ class AdminNotificationsController extends Controller
                 $modelInfoTable->row('Admin', 'admin.email'),
                 $modelInfoTable->row('Title', 'title'),
                 $modelInfoTable->row('Text', 'text'),
-                $modelInfoTable->row('Read at', 'read_at')->butty_date_time,
+                $modelInfoTable->row('Read at', 'read_at')->beautiful_date_time(),
             ),
         );
     }

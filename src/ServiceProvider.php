@@ -66,17 +66,10 @@ class ServiceProvider extends ExtendProvider
     {
         parent::boot();
 
-        $this->loadViewsFrom(
-            __DIR__ . '/../views',
-            'bfg-admin-notifications-extension'
-        );
-
         $this->publishes([
             __DIR__ . '/../assets' => public_path('vendor/bfg-admin-notifications'),
             __DIR__ . '/../migrations' => database_path('migrations')
         ], 'bfg-admin-notifications');
-
-        \Lar\LJS\Facade::jaxNamespace(__DIR__ . '/Jax', '\\Admin\\Extend\\AdminNotifications\\Jax');
     }
 }
 

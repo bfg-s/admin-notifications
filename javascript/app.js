@@ -1,1 +1,4 @@
-require('./lar_resource.js')
+
+document.addEventListener('admin:init', () => {
+    Vue.component('notifications-window', require(`./components/NotificationsWindow`).default);
+});

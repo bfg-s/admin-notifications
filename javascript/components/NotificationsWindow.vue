@@ -42,6 +42,7 @@
 <script>
 export default {
     name: "NotificationsWindow",
+    props: ['messages_route', 'count_of_new_route', 'message_url_route', 'set_as_read_route'],
     data () {
         return {
             items: [],
@@ -49,26 +50,25 @@ export default {
             url: null,
         };
     },
-    async mounted () {
-        this.items = await jax.admin_notifications_executor.messages();
-        this.count = (await jax.admin_notifications_executor.countOfNew())[0];
-        this.url = await jax.admin_notifications_executor.messagesUrl();
+    mounted () {
+        axios.get(this.messages_route).then(d => this.items = d.data);
+        axios.get(this.count_of_new_route).then(d => this.count = d.data);
+        this.url = this.message_url_route;
         document.addEventListener('admin_notifications_update', this.updateItems);
-
     },
     beforeDestroy () {
         document.removeEventListener('admin_notifications_update', this.updateItems);
     },
     methods: {
         async updateItems () {
-            this.items = await jax.admin_notifications_executor.messages();
-            this.count = (await jax.admin_notifications_executor.countOfNew())[0];
+            this.items = (await axios.get(this.messages_route)).data;
+            this.count = (await axios.get(this.count_of_new_route)).data;
             if (this.count) {
                 await this.toggleSound();
             }
         },
         async readed (id) {
-            await jax.admin_notifications_executor.setAsRead(id);
+            await axios.post(this.set_as_read_route, {_token: exec('token'), id})
         },
         async toggleSound() {
             let audio = this.$refs.audio;

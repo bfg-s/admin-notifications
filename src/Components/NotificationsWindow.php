@@ -2,7 +2,7 @@
 
 namespace Admin\Extend\AdminNotifications\Components;
 
-use Lar\Tagable\Vue;
+use Admin\Components\Vue\Vue;
 
 class NotificationsWindow extends Vue
 {
