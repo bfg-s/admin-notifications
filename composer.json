@@ -14,7 +14,7 @@
     "require": {
         "php": "^8.0|^8.1",
         "bfg/admin": "^6.0",
-        "bfg/admin-puller": "^0.1.0|dev-master"
+        "bfg/admin-puller": "^0.2.0|dev-master"
     },
     "require-dev": {},
     "autoload": {
