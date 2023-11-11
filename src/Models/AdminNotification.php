@@ -54,7 +54,7 @@ class AdminNotification extends Model
             $notification->admin?->notifyMe(
                 $notification->title,
                 $notification->text,
-                $notification->link,
+                $notification->link ?: route('admin.home'),
             );
         });
 
