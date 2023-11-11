@@ -51,6 +51,11 @@ class AdminNotification extends Model
                 ->user($notification->admin_user_id)
                 ->channel('admin_notifications_update')
                 ->stream();
+            $notification->admin?->notifyMe(
+                $notification->title,
+                $notification->text,
+                $notification->link,
+            );
         });
 
         static::updated(function (AdminNotification $notification) {
